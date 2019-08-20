@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 import vk_api
 import time
+from time import sleep
 from datetime import datetime as dt
 from datetime import timedelta
 import datetime
@@ -80,45 +81,33 @@ def pop():
     shortlink = (response.json()['response']['short_url'])
     return shortlink
 
+def itog():
+    mess = val() + '\n' + wether() + '\n' + pop()
+    return mess
 
-mess = val()+'\n'+wether()+'\n'+pop()
-print(mess)
-
-def sms(mess):
-    ai = "24521226-E3D7-0B6E-89E7-2519C582F509"
-    link = "https://sms.ru/sms/send"
-    params = {
-    "api_id" : ai,
-    "to": "79314027463",
-    "msg": mess
-    }
-    print(requests.get(link, params=params))
-sms(mess)
-
-'''
-print(a[0])
-now = (a[0]['date'])
-print('реальное',now)
-t_last = dt.fromtimestamp(now)-timedelta(days=1)
-print('Вчера',t_last)
-t_last = datetime.date(t_last.year,t_last.month,t_last.day)
-print(t_last)
-t_now = dt.fromtimestamp(now)
-t_now = datetime.date(t_last.year,t_last.month,t_last.day)
-print(t_now)
-'''
+while True:
+    timestart = {'08:00'}
+    d = datetime.datetime.today()
+    time = d.strftime('%H:%M')
+    if time in timestart:
+        print(itog())
+        sleep(86400)
 
 
 
 
+# def sms(mess):
+#     ai = "24521226-E3D7-0B6E-89E7-2519C582F509"
+#     link = "https://sms.ru/sms/send"
+#     params = {
+#     "api_id" : ai,
+#     "to": "79314027463",
+#     "msg": mess
+#     }
+#     print(requests.get(link, params=params))
+# sms(mess)
 
-'''
-for i in a:
-    #Обращение к элименту словаря
-    print(i)
-    t1=datetime.fromtimestamp(i['date'])
-    print(t1)
-'''
+
 
 
 
